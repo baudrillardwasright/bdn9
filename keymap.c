@@ -50,15 +50,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 
-//issue w/ underglow is probably soldering; need to inspect joints/test w/ multimeter. 
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
+// LED controls 
+
     [0] = LAYOUT(
-        TG(1), KC_HOME, KC_MPLY,
-        MO(1), KC_UP  , RGB_MOD,
-        KC_LEFT, KC_DOWN, KC_RGHT
+        TG(1), RGB_MOD, KC_MPLY,
+        RGB_SPI, RGB_SAI  , RGB_HUI,
+        RGB_SPD, RGB_SAD, RGB_HUD
     ),
 
 //FTL layer
@@ -68,6 +69,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_1, KC_2, KC_3,
         KC_X, KC_Z, KC_J
     ),
+
+// hotkey/debug layer
+
     [2] = LAYOUT(
     TO(0), RESET, DEBUG,
     _______, KC_HOME, RGB_MOD,

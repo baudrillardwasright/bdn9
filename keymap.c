@@ -16,9 +16,10 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-    DMAU = SAFE_RANGE,
-    TIMEKEEP,
+    SWW = SAFE_RANGE,
+    OBJECT,
     QKC,
+    PRIV,
     };
 
 enum encoder_names {
@@ -29,20 +30,25 @@ enum encoder_names {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case DMAU:
+        case SWW:
         if (record->event.pressed) { 
-                SEND_STRING("88-B1098");
+                SEND_STRING("Subject to and without waiving the above objections, Plaintiff responds as follows:");
             } else {
-        case TIMEKEEP:
+        case OBJECT:
         if (record->event.pressed) {
-                SEND_STRING(SS_LCTL("G"));
+                SEND_STRING("Plaintiff objects to this Request on the basis that");
             } else {
         case QKC:
         if (record->event.pressed) { 
                 SEND_STRING("qmk compile"SS_TAP(X_ENT));
+            } else {
+        case PRIV:
+        if (record->event.pressed) { 
+                SEND_STRING("Plaintiff objects to this request to the extent that it seeks information which is covered by the attorney-client privilege or the work product privilege.");
             } else {                        
     }
     break; {
+}
 }
 }
 }
@@ -74,8 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [2] = LAYOUT(
     TO(0), RESET, DEBUG,
-    _______, KC_HOME, RGB_MOD,
-    DMAU, TIMEKEEP, QKC
+    PRIV, KC_MUTE, KC_MFFD,
+    OBJECT, SWW, QKC
 ),
 };
 

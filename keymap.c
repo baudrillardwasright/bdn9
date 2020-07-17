@@ -20,6 +20,7 @@ enum custom_keycodes {
     OBJECT,
     QKC,
     PRIV,
+    LETTERHEAD,
     };
 
 enum encoder_names {
@@ -45,9 +46,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case PRIV:
         if (record->event.pressed) { 
                 SEND_STRING("Plaintiff objects to this request to the extent that it seeks information which is covered by the attorney-client privilege or the work product privilege.");
+            } else {
+        case LETTERHEAD:
+        if (record->event.pressed) { 
+                SEND_STRING(SS_LCTL("j"));
             } else {                        
     }
     break; {
+}
 }
 }
 }
@@ -80,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [2] = LAYOUT(
     TO(0), RESET, DEBUG,
-    PRIV, KC_MUTE, KC_MFFD,
+    PRIV, LETTERHEAD, KC_MFFD,
     OBJECT, SWW, QKC
 ),
 };

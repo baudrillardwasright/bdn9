@@ -1,18 +1,4 @@
-/* Copyright 2019 Danny Nguyen <danny@keeb.io>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
@@ -62,16 +48,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
-// LED controls 
+// DEBUG LAYER 
 
     [0] = LAYOUT(
-        TG(1), RGB_MOD, KC_MPLY,
-        RGB_SPI, RGB_SAI  , RGB_HUI,
-        RGB_SPD, RGB_SAD, RGB_HUD
+        TG(1), RESET, DEBUG,
+        KC_MSEL, KC_MSTP, KC_MRWD,
+        KC_MYCM, KC_MPLY, KC_MFFD
     ),
 
 //FTL layer
@@ -90,6 +74,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     OBJECT, SWW, QKC
 ),
 };
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+
+    // Color codes
+    // https://github.com/qmk/qmk_firmware/blob/master/quantum/rgblight_list.h
+
+    uint8_t layer = biton32(state);
+
+    switch (layer) {
+
+        case 0:
+            rgblight_mode(RGBLIGHT_MODE_BREATHING);
+            rgblight_sethsv(213, 255, 255);
+            break;
+
+        case 1:
+            rgblight_mode(RGBLIGHT_MODE_BREATHING);
+            rgblight_sethsv(85, 255, 255);
+            break;
+
+        case 2:
+            rgblight_mode(RGBLIGHT_MODE_BREATHING);
+            rgblight_sethsv(128, 255, 255);
+            break;
+
+    }
+
+    return state;
+}
+
+
 
 
 
